@@ -20,10 +20,9 @@ app.post(
     checkJwt,
     celebrate({
       [Segments.BODY]: Joi.object().keys({
-        id: Joi.string().alphanum().required(),
         partySize: Joi.number().min(0).required(),
         date: Joi.string().required(),
-        userId: Joi.string().alphanum().required(),
+        userId: Joi.string().required(),
         restaurantName: Joi.string().required(),
       })
     }),
@@ -38,9 +37,7 @@ app.post(
         await reservation.save();
         return res.status(201).send(formatReservation(reservation));
       } catch (error) {
-        if (error.name === "ValidationError") {
-            error.status = 401;
-        }
+        
         next(error);
       }
     }
@@ -64,7 +61,6 @@ app.get("/reservations/:id", async (req, res) => {
        return res.status(404).send([{ "error": "not found" }]);
     }
 
-    
     res.status(200).send(formatReservation(reservation));
 });
 
