@@ -4,7 +4,9 @@ const cors = require("cors");
 const { celebrate, Joi, errors, Segments } = require('celebrate');
 const { auth } = require('express-oauth2-jwt-bearer');
 const ReservationModel = require("./models/ReservationModel");
-const formatReservation = require("./formatReservation")
+const formatReservation = require("./formatReservation");
+const RestaurantModel = require("./models/RestaurantModel");
+const formatRestaurant = require("./formatRestaurant");
 
 const app = express();
 const checkJwt = auth({
@@ -20,14 +22,14 @@ app.post(
     checkJwt,
     celebrate({
       [Segments.BODY]: Joi.object().keys({
-        partySize: Joi.number().min(0).required(),
+        partySize: Joi.number().min(1).required(),
         date: Joi.string().required(),
         userId: Joi.string().required(),
         restaurantName: Joi.string().required(),
       })
     }),
-    async (req, res, next) => {
-      try {
+    async (req, res) => {
+      
         const { body, auth } = req;
         const reservationBody = {
           createdBy: auth.payload.sub,
@@ -36,10 +38,7 @@ app.post(
         const reservation = new ReservationModel(reservationBody);
         await reservation.save();
         return res.status(201).send(formatReservation(reservation));
-      } catch (error) {
-        
-        next(error);
-      }
+       
     }
   );
 
@@ -50,18 +49,49 @@ app.get("/reservations", async (request, response) => {
 
 app.get("/reservations/:id", async (req, res) => {
     const id = req.params.id;
+    
 
     if (!mongoose.Types.ObjectId.isValid(id)){
-       return res.status(400).send([{ "error": "invalid id provided" }])
-    }
-
+       return res.status(400).send({ "error": "invalid id provided" })
+    } 
+    
     const reservation = await ReservationModel.findById(id);
 
-    if(reservation === null){
-       return res.status(404).send([{ "error": "not found" }]);
+    if (reservation === null){
+       return res.status(404).send({ "error": "not found" });
+    }
+
+    if (!reservation) {
+        return res.status(403).send({ "error": "user does not have permission to access this reservation" });
     }
 
     res.status(200).send(formatReservation(reservation));
+
+    
+   
+    
+});
+
+
+app.get("/restaurants", async (request, response) => {
+    const restaurants = await RestaurantModel.find({});
+    return response.status(200).send(restaurants.map(formatRestaurant));
+});
+
+app.get("/restaurants/:id", async (req, res) => {
+    const id = req.params.id;
+
+    if (!mongoose.Types.ObjectId.isValid(id)){
+       return res.status(400).send({ "error": "invalid id provided" })
+    }
+
+    const restaurant = await RestaurantModel.findById(id);
+
+    if(restaurant === null){
+       return res.status(404).send([{ "error": "not found" }]);
+    }
+
+    res.status(200).send(formatRestaurant(restaurant));
 });
 
 app.use(errors());
