@@ -93,36 +93,11 @@ describe("GET /reservations/:id", () => {
     });
 
     it("Should respond with a 403 error for user trying to access reservation they did not create", async () => {
-        const expectedStatus = 403;
-        const expectedBody = [
-            {
-                id: "507f1f77bcf86cd799439011",
-                partySize: 4,
-                date: "2023-11-17T06:30:00.000Z",
-                userId: "mock-user-id",
-                restaurantName: "Island Grill"
-            },
-            {
-                id: "614abf0a93e8e80ace792ac6",
-                partySize: 2,
-                date: "2023-12-03T07:00:00.000Z",
-                userId: "mock-user-id",
-                restaurantName: "Green Curry"
-            },
-            {
-                id: "61679189b54f48aa6599a7fd",
-                partySize: 2,
-                date: "2023-12-03T07:00:00.000Z",
-                userId: "another-user-id",
-                restaurantName: "Green Curry"
-            }
-        ]
+        
         await request(app)
-        .get("/reservations/another-user-id")
-        .expect(expectedStatus)
-        .expect((res) => {
-            expect(res.body).toEqual(expectedBody);
-        });
+        .get("/reservations/61679189b54f48aa6599a7fd")
+        .expect(403)
+       
     });
 
     it("Should respond with a 404 error with non-existing reservation", async () => {

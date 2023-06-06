@@ -47,9 +47,9 @@ app.get("/reservations", async (request, response) => {
     return response.status(200).send(reservations.map(formatReservation));
 });
 
-app.get("/reservations/:id", async (req, res) => {
+app.get("/reservations/:id", checkJwt, async (req, res) => {
     const id = req.params.id;
-    
+    const userId = req.auth.payload.sub;
 
     if (!mongoose.Types.ObjectId.isValid(id)){
        return res.status(400).send({ "error": "invalid id provided" })
@@ -61,7 +61,7 @@ app.get("/reservations/:id", async (req, res) => {
        return res.status(404).send({ "error": "not found" });
     }
 
-    if (!reservation) {
+    if (reservation.userId !== userId) {
         return res.status(403).send({ "error": "user does not have permission to access this reservation" });
     }
 
