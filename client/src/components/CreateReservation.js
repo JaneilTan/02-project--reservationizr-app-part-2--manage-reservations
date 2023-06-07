@@ -57,7 +57,7 @@ const CreateReservation = ({ restaurantName }) => {
   return (
   <>
   <form onSubmit={handleSubmit}>
-  <p> 
+  <div> 
     <label htmlFor="partySize">Number of guest</label>
     <input 
       type="text"
@@ -69,8 +69,8 @@ const CreateReservation = ({ restaurantName }) => {
       }}
       required
     />
-   </p> 
-   <p>
+   </div> 
+   <div>
     <label htmlFor="startDate">Date</label>
       <DatePicker 
       className="form-input"
@@ -80,7 +80,7 @@ const CreateReservation = ({ restaurantName }) => {
       minDate={new Date()}
       required
       /> 
-    </p>
+    </div>
     <button className="submit-btn" disabled={isLoading}>
           Submit
         </button>

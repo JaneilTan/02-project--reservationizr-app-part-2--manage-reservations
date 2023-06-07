@@ -19,12 +19,17 @@ const App = () => {
       <Header />
       <div className="container">
         <Routes>
-          <Route path="/reservations/:id" element={<Reservation />} />
-          <Route path="/reservations" element={<ReservationList />} />
           <Route path="/restaurants/:id" element={<ProtectedRoute />}>
             <Route path="/restaurants/:id" element={<Restaurant />} />
           </Route>
-          <Route path="/" element={<RestaurantList />} />
+          
+            <Route path="/reservations/:id" element={<Reservation />} />
+           
+          
+            <Route path="/reservations" element={<ReservationList />} />
+          
+          
+            <Route path="/" element={<RestaurantList />} />
         </Routes>
       </div>
     </>
