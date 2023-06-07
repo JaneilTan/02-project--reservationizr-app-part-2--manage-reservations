@@ -7,7 +7,7 @@ const reservationSchema = Schema({
   date: { type: Date, default: Date.now, required:true },
   userId: {type: String, required: true},
   restaurantName: {type: String, required: true},
-  createdBy: {type: String, required: true},
+  
 });
 
 
