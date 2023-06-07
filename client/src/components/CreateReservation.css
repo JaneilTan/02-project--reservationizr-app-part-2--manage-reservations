@@ -1,26 +1,26 @@
-a {
-  -webkit-text-fill-color: red;
+h2 {
+  text-align: center;
 }
-.nav-link {
-  -webkit-text-fill-color: #2b2c34;
+label {
+  display: block;
 }
-@media screen and (max-width: 48rem) {
-  div {
-    display: block;
-  }
-  .center {
-    text-align: left;
-  }
-  .restaurant {
-    border-bottom: dotted;
-  }
+.form-input {
+  width: 20rem;
+}
+.submit-btn {
+  background-color: rgb(245, 45, 45);
+  border-color: rgb(245, 45, 45);
+  border-radius: 0.25rem;
+  border-style: hidden;
+  width: 5rem;
+  height: 2rem;
+  margin: 1rem auto;
+  color: azure;
 }
 
-@media screen and (min-width: 35rem) {
-  .restaurant {
+@media screen and (max-width: 48rem) {
+  img {
+    width: 50%;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: dotted;
   }
 }

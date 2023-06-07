@@ -1,0 +1,27 @@
+a {
+  -webkit-text-fill-color: red;
+}
+.nav-link {
+  -webkit-text-fill-color: #2b2c34;
+}
+@media screen and (max-width: 48rem) {
+  div {
+    display: block;
+  }
+  .center {
+    text-align: left;
+  }
+  .restaurant {
+    border-bottom: dotted;
+  }
+}
+
+@media screen and (min-width: 35rem) {
+  .restaurant {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: dotted;
+    padding: 0.5rem;
+  }
+}
