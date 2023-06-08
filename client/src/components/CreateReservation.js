@@ -23,6 +23,7 @@ const CreateReservation = ({ restaurantName }) => {
     const reservation = {
       startDate,
       partySize,
+      restaurantName,
     }
 
     const response = await fetch("http://localhost:5001/reservations", {

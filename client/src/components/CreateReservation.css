@@ -20,7 +20,6 @@ label {
 
 @media screen and (max-width: 48rem) {
   img {
-    width: 50%;
     display: flex;
   }
 }

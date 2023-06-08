@@ -9,7 +9,6 @@ describe("POST /reservations", () => {
         const body = {
             partySize: 4,
             date: "2023-11-17T06:30:00.000Z",
-            userId: "mock-user-id",
             restaurantName: "Island Grill"
         };
     
@@ -38,21 +37,18 @@ describe("GET /reservations", () => {
                 id: "507f1f77bcf86cd799439011",
                 partySize: 4,
                 date: "2023-11-17T06:30:00.000Z",
-                userId: "mock-user-id",
                 restaurantName: "Island Grill"
             },
             {
                 id: "614abf0a93e8e80ace792ac6",
                 partySize: 2,
                 date: "2023-12-03T07:00:00.000Z",
-                userId: "mock-user-id",
                 restaurantName: "Green Curry"
             },
             {
                 id: "61679189b54f48aa6599a7fd",
                 partySize: 2,
                 date: "2023-12-03T07:00:00.000Z",
-                userId: "another-user-id",
                 restaurantName: "Green Curry"
             }
         ]
@@ -73,7 +69,6 @@ describe("GET /reservations/:id", () => {
             id: "507f1f77bcf86cd799439011",
             partySize: 4,
             date: "2023-11-17T06:30:00.000Z",
-            userId: "mock-user-id",
             restaurantName: "Island Grill"
         };
 
