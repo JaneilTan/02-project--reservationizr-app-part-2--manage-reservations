@@ -13,7 +13,8 @@ const RestaurantList = () => {
       setRestaurants(data);
     }
     loadRestaurants();
-  })
+
+  }, []);
   return (
     <>
       <h1>Restaurants</h1>

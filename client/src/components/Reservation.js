@@ -12,7 +12,11 @@ const Reservation = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+    
+      
       const response = await fetch(`http://localhost:5001/reservations/${id}`);
+
+      
 
       if (response.ok === false) {
         setIsNotFound(true);

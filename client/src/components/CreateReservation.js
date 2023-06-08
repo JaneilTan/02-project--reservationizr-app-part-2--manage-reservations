@@ -7,7 +7,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import "./CreateReservation.css";
 
 const CreateReservation = ({ restaurantName }) => {
-  const [startDate, setStartDate] = useState(new Date());
+  const [date, setDate] = useState(new Date());
   const [partySize, setPartySize] = useState("");
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
@@ -21,7 +21,7 @@ const CreateReservation = ({ restaurantName }) => {
     setIsLoading(true);
 
     const reservation = {
-      startDate,
+      date,
       partySize,
       restaurantName,
     }
@@ -39,7 +39,7 @@ const CreateReservation = ({ restaurantName }) => {
       setErrorStatus(response.status);
     } else {
       setIsLoading(false);
-      navigate("/");
+      navigate("/reservations");
     }
   };
   if (isError) {
@@ -74,9 +74,10 @@ const CreateReservation = ({ restaurantName }) => {
    <div>
     <label htmlFor="startDate">Date</label>
       <DatePicker 
+      id="startDate"
       className="form-input"
-      selected={startDate} 
-      onChange={(date) => setStartDate(date)} 
+      selected={date} 
+      onChange={(date) => setDate(date)} 
       showTimeSelect
       minDate={new Date()}
       required

@@ -23,7 +23,7 @@ app.post(
     celebrate({
       [Segments.BODY]: Joi.object().keys({
         partySize: Joi.number().min(1).required(),
-        date: Joi.string().required(),
+        date: Joi.date().required(),
         restaurantName: Joi.string().required(),
       })
     }),
@@ -41,9 +41,11 @@ app.post(
     }
   );
 
-app.get("/reservations", async (request, response) => {
-    const reservations = await ReservationModel.find({});
-    return response.status(200).send(reservations.map(formatReservation));
+app.get("/reservations", checkJwt, async (req, res) => {
+    const userId = req.auth.payload.sub;
+    const reservations = await ReservationModel.find({userId});
+    
+    return res.status(200).send(reservations.map(formatReservation));
 });
 
 app.get("/reservations/:id", checkJwt, async (req, res) => {
