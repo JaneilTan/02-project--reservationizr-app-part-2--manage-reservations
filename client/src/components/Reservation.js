@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { formatDate } from "../utils/formatDate";
+import { useAuth0 } from "@auth0/auth0-react";
 import "./Reservation.css";
 import BackButton from "./BackButton";
 
@@ -9,12 +10,19 @@ const Reservation = () => {
   const [reservation, setReservation] = useState({});
   const [isNotFound, setIsNotFound] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const { getAccessTokenSilently } = useAuth0();
 
   useEffect(() => {
     const fetchData = async () => {
     
-      
-      const response = await fetch(`http://localhost:5001/reservations/${id}`);
+      const accessToken = await getAccessTokenSilently();
+      const response = await fetch(`http://localhost:5001/reservations/${id}`, {
+    
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
 
       
 
@@ -29,7 +37,7 @@ const Reservation = () => {
     };
 
     fetchData();
-  }, [id]);
+  }, [id, getAccessTokenSilently]);
   
   
   if (isNotFound) {
@@ -47,11 +55,11 @@ const Reservation = () => {
 
   return (
     <>
-      <h1>Reservation</h1>
+      
       <div className="restaurant"></div>
        <h2>{reservation.restaurantName}</h2>
        <p>{formatDate(reservation.date)}</p>
-       <p><strong>Party Size:</strong>{reservation.partySize}</p>
+       <p><strong>Party Size:</strong> {reservation.partySize}</p>
         
         <BackButton />
     </>

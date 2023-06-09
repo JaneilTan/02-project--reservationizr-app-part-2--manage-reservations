@@ -4,6 +4,7 @@ const formatReservation = (reservation) => {
       partySize: reservation.partySize,
       date: reservation.date,
       restaurantName: reservation.restaurantName,
+      userId: reservation.userId,
     };
   };
   

@@ -34,6 +34,7 @@ app.post(
           userId: auth.payload.sub,
           ...body
         }
+        
         const reservation = new ReservationModel(reservationBody);
         await reservation.save();
         return res.status(201).send(formatReservation(reservation));
@@ -51,13 +52,13 @@ app.get("/reservations", checkJwt, async (req, res) => {
 app.get("/reservations/:id", checkJwt, async (req, res) => {
     const id = req.params.id;
     const userId = req.auth.payload.sub;
-
+    
     if (!mongoose.Types.ObjectId.isValid(id)){
        return res.status(400).send({ "error": "invalid id provided" })
     } 
     
     const reservation = await ReservationModel.findById(id);
-
+    
     if (reservation === null){
        return res.status(404).send({ "error": "not found" });
     }

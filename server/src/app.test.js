@@ -24,7 +24,10 @@ describe("POST /reservations", () => {
     
     it("Should respond with 400 when an invalid request body is provided", async () => {
         const expectedStatus = 400;
-        const body = {};
+        const body = {
+            partySize: -1,
+            
+        };
     
         await request(app).post("/reservations").send(body).expect(expectedStatus);
       });
@@ -37,19 +40,15 @@ describe("GET /reservations", () => {
                 id: "507f1f77bcf86cd799439011",
                 partySize: 4,
                 date: "2023-11-17T06:30:00.000Z",
-                restaurantName: "Island Grill"
+                restaurantName: "Island Grill",
+                userId: "mock-user-id",
             },
             {
                 id: "614abf0a93e8e80ace792ac6",
                 partySize: 2,
                 date: "2023-12-03T07:00:00.000Z",
-                restaurantName: "Green Curry"
-            },
-            {
-                id: "61679189b54f48aa6599a7fd",
-                partySize: 2,
-                date: "2023-12-03T07:00:00.000Z",
-                restaurantName: "Green Curry"
+                restaurantName: "Green Curry",
+                userId: "mock-user-id",
             }
         ]
 
@@ -69,7 +68,8 @@ describe("GET /reservations/:id", () => {
             id: "507f1f77bcf86cd799439011",
             partySize: 4,
             date: "2023-11-17T06:30:00.000Z",
-            restaurantName: "Island Grill"
+            restaurantName: "Island Grill",
+            userId: "mock-user-id",
         };
 
         await request(app)

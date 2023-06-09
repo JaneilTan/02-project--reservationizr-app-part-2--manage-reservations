@@ -6,7 +6,7 @@ const reservationSchema = Schema({
   partySize: {type: Number, required: true},
   date: { type: Date, required:true },
   restaurantName: {type: String, required: true},
-  
+  userId: {type: String, required: true},
 });
 
 
