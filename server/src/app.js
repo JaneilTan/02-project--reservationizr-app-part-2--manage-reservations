@@ -37,9 +37,7 @@ app.post(
         
         const reservation = new ReservationModel(reservationBody);
         await reservation.save();
-        if (reservation === null) {
-          return res.status(400).send({ "error": "invalid id provided" })
-        }
+       
         return res.status(201).send(formatReservation(reservation));
       } 
   
@@ -93,7 +91,7 @@ app.get("/restaurants/:id", async (req, res) => {
     const restaurant = await RestaurantModel.findById(id);
 
     if(restaurant === null){
-       return res.status(404).send([{ "error": "not found" }]);
+       return res.status(404).send({ "error": "not found" });
     }
 
     res.status(200).send(formatRestaurant(restaurant));

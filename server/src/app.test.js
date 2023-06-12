@@ -28,7 +28,7 @@ describe("POST /reservations", () => {
         await request(app).post("/reservations").send(body).expect(expectedStatus);
     });
     
-    it("Should respond with 400 when party guest is < 1", async () => {
+    it("Should respond with 400 when partySize is less than 1", async () => {
         const expectedStatus = 400;
         const body = {
             partySize: 0,
@@ -90,24 +90,45 @@ describe("GET /reservations/:id", () => {
 
     it("Should respond with a 400 error with invalid ids", async () => {
     
+        const expectedStatus = 400
+        const expectedBody = {
+            "error": "invalid id provided"
+        }
         await request(app)
         .get("/reservations/111")
-        .expect(400)
+        .expect(expectedStatus)
+        .expect((res) => {
+            expect(res.body).toEqual(expectedBody);
+        });
     });
 
     it("Should respond with a 403 error for user trying to access reservation they did not create", async () => {
         
+        const expectedStatus = 403
+        const expectedBody = {
+            "error": "user does not have permission to access this reservation"
+        }
         await request(app)
         .get("/reservations/61679189b54f48aa6599a7fd")
-        .expect(403)
+        .expect(expectedStatus)
+        .expect((res) => {
+            expect(res.body).toEqual(expectedBody);
+        });
        
     });
 
     it("Should respond with a 404 error with non-existing reservation", async () => {
     
-    await request(app)
+        const expectedStatus = 404
+        const expectedBody = {
+            "error": "not found"
+        }
+        await request(app)
         .get("/reservations/507f1f77bcf86cd79943901b")
-        .expect(404)
+        .expect(expectedStatus)
+        .expect((res) => {
+            expect(res.body).toEqual(expectedBody);
+        });
     });
 });
 });
@@ -164,15 +185,30 @@ describe("GET /restaurant/:id", () => {
     });
     it("Should respond with a 400 error with invalid ids", async () => {
         
+        const expectedStatus = 400
+        const expectedBody = {
+            "error": "invalid id provided"
+        }
         await request(app)
         .get("/restaurants/mk")
-        .expect(400)
-        });
-    it("Should respond with a 404 error with non-existing restaurant", async () => {
-        
-        await request(app)
-        .get("/restaurants/616005cae3c8e880c13dc0bE")
-        .expect(404)
+        .expect(expectedStatus)
+        .expect((res) => {
+            expect(res.body).toEqual(expectedBody);
         });
     });
+    it("Should respond with a 404 error with non-existing restaurant", async () => {
+        
+        const expectedStatus = 404
+        const expectedBody = {
+            "error": "not found"
+        }
+        await request(app)
+        .get("/restaurants/616005cae3c8e880c13dc0bE")
+        .expect(expectedStatus)
+        .expect((res) => {
+            expect(res.body).toEqual(expectedBody);
+        });
+    });
+    
+});
 });
