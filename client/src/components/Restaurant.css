@@ -1,0 +1,13 @@
+@media (min-width: 51.25rem) {
+  .restaurant-img {
+    float: left;
+    width: 50%;
+    margin-right: 1rem;
+  }
+  h2 {
+    margin-left: 1rem;
+  }
+  h3 {
+    margin-top: 5rem;
+  }
+}
