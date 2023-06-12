@@ -23,7 +23,7 @@ app.post(
     celebrate({
       [Segments.BODY]: Joi.object().keys({
         partySize: Joi.number().min(1).required(),
-        date: Joi.date().required(),
+        date: Joi.date().min('now').required(),
         restaurantName: Joi.string().required(),
       })
     }),
@@ -37,9 +37,12 @@ app.post(
         
         const reservation = new ReservationModel(reservationBody);
         await reservation.save();
+        if (reservation === null) {
+          return res.status(400).send({ "error": "invalid id provided" })
+        }
         return res.status(201).send(formatReservation(reservation));
-       
-    }
+      } 
+  
   );
 
 app.get("/reservations", checkJwt, async (req, res) => {

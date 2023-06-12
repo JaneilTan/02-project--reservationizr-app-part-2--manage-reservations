@@ -21,16 +21,22 @@ describe("POST /reservations", () => {
             expect(response.body.id).toBeTruthy();
           });
       });
-    
     it("Should respond with 400 when an invalid request body is provided", async () => {
         const expectedStatus = 400;
+        const body = {};
+    
+        await request(app).post("/reservations").send(body).expect(expectedStatus);
+    });
+    
+    it("Should respond with 400 when party guest is < 1", async () => {
+        const expectedStatus = 400;
         const body = {
-            partySize: -1,
+            partySize: 0,
             
         };
     
         await request(app).post("/reservations").send(body).expect(expectedStatus);
-      });
+    });
 });   
 describe("GET /reservations", () => {      
     it("Should return a list of reservations", async () => {
@@ -40,23 +46,25 @@ describe("GET /reservations", () => {
                 id: "507f1f77bcf86cd799439011",
                 partySize: 4,
                 date: "2023-11-17T06:30:00.000Z",
-                restaurantName: "Island Grill",
                 userId: "mock-user-id",
+                restaurantName: "Island Grill"
             },
             {
-                id: "614abf0a93e8e80ace792ac6",
+                id: "614abf0a93e8e80ace792ac6" ,
                 partySize: 2,
                 date: "2023-12-03T07:00:00.000Z",
-                restaurantName: "Green Curry",
                 userId: "mock-user-id",
-            }
-        ]
+                restaurantName: "Green Curry"
+            },
+
+            ]
+        
 
           await request(app)
             .get("/reservations")
             .expect(expectedStatus)
-            .expect((response) => {
-                expect(response.body).toEqual(expectedBody);
+            .expect((res) => {
+                expect(res.body).toEqual(expectedBody);
             });
     });
 });

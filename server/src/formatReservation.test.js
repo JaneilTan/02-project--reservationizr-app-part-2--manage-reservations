@@ -7,12 +7,14 @@ describe("formatReservation", () => {
             partySize: 4,
             date: "2023-11-17T06:30:00.000Z",
             restaurantName: "Island Grill",
+            userId: "mock-user-id"
         };
         const input = {
             _id: "507f1f77bcf86cd799439011",
             partySize: 4,
             date: "2023-11-17T06:30:00.000Z",
             restaurantName: "Island Grill",
+            userId: "mock-user-id"
         };
         const actual = formatReservation(input);
         expect(actual).toEqual(expected);

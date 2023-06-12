@@ -1,0 +1,11 @@
+h2 {
+  display: inline-block;
+}
+.btn.btn-center {
+  text-decoration-line: none;
+  color: rgb(50, 48, 48);
+  border-style: hidden;
+  background-color: rgb(197, 194, 194);
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+}

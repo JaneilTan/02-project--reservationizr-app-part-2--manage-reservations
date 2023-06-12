@@ -9,7 +9,6 @@ a.reserve-btn {
   padding: 1rem auto;
   margin: 1rem auto;
   background-color: rgb(245, 45, 45);
-  border-color: rgb(245, 45, 45);
 }
 
 @media (min-width: 51.25rem) {

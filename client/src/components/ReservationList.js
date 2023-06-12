@@ -33,7 +33,7 @@ const ReservationList = () => {
         <h2>{reservation.restaurantName}</h2>
         <p>{formatDate(reservation.date)}</p>
         
-        <Link to={`/reservations/${reservation.id}`}>View the restaurants</Link>
+        <Link to={`/reservations/${reservation.id}`} className="btn view-btn">View details &rarr;</Link>
       </div>  
       ))}
     </>

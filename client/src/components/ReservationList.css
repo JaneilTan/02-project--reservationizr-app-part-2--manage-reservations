@@ -1,6 +1,9 @@
 .nav-link {
   -webkit-text-fill-color: #2b2c34;
 }
+.btn.view-btn {
+  color: rgb(245, 45, 45);
+}
 @media screen and (max-width: 48rem) {
   div {
     display: block;
@@ -10,6 +13,7 @@
   }
   .restaurant {
     border-bottom: dotted;
+    padding-bottom: 1rem;
   }
 }
 
