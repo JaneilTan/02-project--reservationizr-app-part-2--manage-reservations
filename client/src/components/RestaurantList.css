@@ -4,12 +4,12 @@ a.reserve-btn {
   text-decoration: none;
   border-radius: 0.35rem;
   border-style: hidden;
-  color: #ffff;
   width: 8rem;
   height: 2rem;
   padding: 1rem auto;
   margin: 1rem auto;
-  background-color: #322c2a;
+  color: #ffff;
+  background-color: #d70303;
 }
 
 @media (min-width: 51.25rem) {
