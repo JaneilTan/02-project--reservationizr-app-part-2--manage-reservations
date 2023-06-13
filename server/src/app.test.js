@@ -19,6 +19,7 @@ describe("POST /reservations", () => {
           .expect((response) => {
             expect(response.body).toEqual(expect.objectContaining(body));
             expect(response.body.id).toBeTruthy();
+            expect(response.body.userId).toBeTruthy();
           });
       });
     it("Should respond with 400 when an invalid request body is provided", async () => {

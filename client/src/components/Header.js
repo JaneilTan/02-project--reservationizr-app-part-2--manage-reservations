@@ -5,23 +5,23 @@ import LoginButton from "./LoginButton";
 
 const Header = () => {
   return (
-    <header className="header">
+    <header className="header" alt="header">
       <div className="container">
         <Link to="/" className="header-title">
-          <img className="logo" src={Logo} alt="" width="300" />
+          <img className="logo" src={Logo} alt="reservationizr-logo" width="300" />
         </Link>
         <ul className="nav">
           <li className="nav-item">
-            <Link to="/" className="nav-link">
+            <Link to="/" className="nav-link" alt="restaurants">
               Restaurants
             </Link>
           </li>
           <li className="nav-item">
-            <Link to="/reservations" className="nav-link">
+            <Link to="/reservations" className="nav-link" alt="reservations">
               My reservations
             </Link>
           </li>
-          <li className="nav-item">
+          <li className="nav-item" alt="login-button">
             <LoginButton />
           </li>
         </ul>

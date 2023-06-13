@@ -1,14 +1,15 @@
 a.reserve-btn {
   display: block;
   text-align: center;
+  text-decoration: none;
   border-radius: 0.35rem;
   border-style: hidden;
-  color: azure;
+  color: #ffff;
   width: 8rem;
   height: 2rem;
   padding: 1rem auto;
   margin: 1rem auto;
-  background-color: rgb(245, 45, 45);
+  background-color: #322c2a;
 }
 
 @media (min-width: 51.25rem) {
