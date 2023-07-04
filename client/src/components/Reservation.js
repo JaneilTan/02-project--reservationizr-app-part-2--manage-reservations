@@ -16,7 +16,7 @@ const Reservation = () => {
     const fetchData = async () => {
     
       const accessToken = await getAccessTokenSilently();
-      const response = await fetch(`http://localhost:5001/reservations/${id}`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/reservations/${id}`, {
     
       headers: {
         "Content-Type": "application/json",
